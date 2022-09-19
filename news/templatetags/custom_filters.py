@@ -18,8 +18,8 @@ def censor(value):
     """
     if type(value) is str:
         for word in CENSOR_WORDS:
-            value = value.replace(word, "*" * len(word))
-            value = value.replace(word.capitalize(), "*" * len(word))
+            value = value.replace(word, word[0] + "*" * (len(word) - 1))
+            value = value.replace(word.capitalize(), word[0] + "*" * (len(word) - 1))
     else:
         raise ValueError('Требуется строка')
 
