@@ -24,3 +24,5 @@ def censor(value):
         raise ValueError('Требуется строка')
 
     return f'{value}'
+
+
