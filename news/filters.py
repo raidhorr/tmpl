@@ -21,4 +21,4 @@ class PostFilter(FilterSet):
         model = Post
         # В fields мы описываем по каким полям модели
         # будет производиться фильтрация.
-        fields = ['text', 'time_in']
+        fields = ['text']
