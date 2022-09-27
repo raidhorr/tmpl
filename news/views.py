@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .filters import PostFilter
 from .forms import PostForm
@@ -43,13 +44,17 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, CreateView):
+    login = '/sign/login'
+    redirect_field_name = 'redirect_to'
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
 
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
+    login = '/sign/login'
+    redirect_field_name = 'redirect_to'
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -60,7 +65,7 @@ class ArticleCreate(CreateView):
         return super().form_valid(form)
 
 
-class NewsUpdate(UpdateView):
+class NewsUpdate(LoginRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -71,7 +76,9 @@ class NewsUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class ArticleUpdate(UpdateView):
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
+    login = '/sign/login'
+    redirect_field_name = 'redirect_to'
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
@@ -82,7 +89,9 @@ class ArticleUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
+    login = '/sign/login'
+    redirect_field_name = 'redirect_to'
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
