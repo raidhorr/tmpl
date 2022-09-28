@@ -5,3 +5,4 @@ urlpatterns = [
     # path('', IndexView.as_view()),
     path('', include('news.urls'))
 ]
+
